@@ -1,7 +1,7 @@
 <template>
     <!-- the string after the first comma in the v-bound class array will always be there and is not conditional -->
     <div :class="[task.reminder ? 'reminder': '', 'task']">
-        <h3>{{task.text}} <i class="fas fa-times"></i></h3>
+        <h3>{{task.text}} <i @click="onDelete(task.id)" class="fas fa-times"></i></h3>
         <p>{{task.day}}</p>
     </div>
 </template>
@@ -11,6 +11,11 @@
         name: 'Task',
         props: {
             task: Object
+        },
+        methods: {
+            onDelete(id) {
+                this.$emit('delete-task', id)
+            }
         }
     }
 </script>
