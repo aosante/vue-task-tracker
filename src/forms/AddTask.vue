@@ -1,5 +1,6 @@
 <template>
      <form @submit="onSubmit" class="add-form">
+         <!-- v-model is like using value in react -->
         <div class="form-control">
             <label>Task</label>
             <input type="text" v-model="text" name="text" placeholder="Add Task" />
@@ -24,6 +25,7 @@
 <script>
 export default {
     name: 'AddTask',
+    // the data returned by this method (in this case) is like binding form data to state in react 
     data() {
         return {
             text: '',

@@ -31,7 +31,7 @@ export default {
       this.tasks = this.tasks.map(task => task.id === id ? {...task, reminder: !task.reminder}: task)
     },
     addTask(newTask) {
-      this.tasks.unshift(newTask)
+      this.tasks = [...this.tasks, newTask]
     }
   },
   created() {
