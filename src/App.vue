@@ -1,19 +1,22 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
+    <AddTask @add-task="addTask" />
     <Tasks :tasks="tasks" @delete-task="deleteTask" @toggle-reminder="toggleReminder" />
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
-import Tasks from './components/Tasks'
+import Tasks from './task-components/Tasks'
+import AddTask from './forms/AddTask'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Tasks
+    Tasks,
+    AddTask
   },
   data()  {
     return{
@@ -26,6 +29,9 @@ export default {
     },
     toggleReminder(id) {
       this.tasks = this.tasks.map(task => task.id === id ? {...task, reminder: !task.reminder}: task)
+    },
+    addTask(newTask) {
+      this.tasks.unshift(newTask)
     }
   },
   created() {
