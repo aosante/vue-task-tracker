@@ -34,8 +34,18 @@ export default {
 
       res.status === 200 ? (this.tasks = this.tasks.filter(task => task.id !== id)) : alert(`Woops, Couldn't delete task`)
     },
-    toggleReminder(id) {
-      this.tasks = this.tasks.map(task => task.id === id ? {...task, reminder: !task.reminder}: task)
+    async toggleReminder(id) {
+      const taskToToggle = await this.fetchTaksk(id)
+      const updatedTask = {...taskToToggle, reminder: !task.taskToToggle.reminder}
+      const res = await fetch(`api/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(updatedTask)
+      })
+      const data = res.json()
+      this.tasks = this.tasks.map(task => task.id === id ? {...task, reminder: !data.reminder}: task)
     },
     async addTask(newTask) {
       const res = await fetch('api/tasks', {
